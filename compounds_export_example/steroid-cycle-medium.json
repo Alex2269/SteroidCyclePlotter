@@ -1,0 +1,79 @@
+{
+  "startDate": "2026-05-05",
+  "combine": false,
+  "unitSwitch": true,
+  "compounds": [
+    {
+      "name": "TestosteroneEnanthate",
+      "dose": 75,
+      "interval": 1,
+      "duration": 4,
+      "startOffset": 0,
+      "groupId": 0
+    },
+    {
+      "name": "Anastrozole",
+      "dose": 0.15,
+      "interval": 3,
+      "duration": 18,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "Oxymetholone",
+      "dose": 12.5,
+      "interval": 1,
+      "duration": 15,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.0825,
+      "interval": 3,
+      "duration": 18,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.1155,
+      "interval": 4,
+      "duration": 18,
+      "startOffset": 24,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneEnanthate",
+      "dose": 100,
+      "interval": 3,
+      "duration": 18,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteronePropionate",
+      "dose": 35,
+      "interval": 2,
+      "duration": 18,
+      "startOffset": 24,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 40,
+      "interval": 1,
+      "duration": 7,
+      "startOffset": 45,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 20,
+      "interval": 1,
+      "duration": 20,
+      "startOffset": 52,
+      "groupId": 0
+    }
+  ]
+}
