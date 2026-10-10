@@ -1,0 +1,88 @@
+{
+  "startDate": "2026-04-01",
+  "combine": false,
+  "unitSwitch": true,
+  "compounds": [
+    {
+      "name": "TestosteronePropionate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneDipropionate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteronePhenylpropionate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneEnanthate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneIsocaproate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneCaproate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneCypionate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneDecanoate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneUndecanoate",
+      "dose": 25,
+      "interval": 1,
+      "duration": 200,
+      "startOffset": 0,
+      "timeOffsetHours": 0,
+      "groupId": 0
+    }
+  ]
+}

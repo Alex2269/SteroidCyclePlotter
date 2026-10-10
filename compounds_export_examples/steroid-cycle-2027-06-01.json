@@ -1,0 +1,103 @@
+{
+  "startDate": "2027-06-01",
+  "combine": false,
+  "unitSwitch": true,
+  "compounds": [
+    {
+      "name": "TestosteroneCypionate",
+      "dose": 120,
+      "interval": 2,
+      "duration": 8,
+      "startOffset": 0,
+      "groupId": 0
+    },
+    {
+      "name": "BoldenoneUndecylenate",
+      "dose": 80,
+      "interval": 2,
+      "duration": 8,
+      "startOffset": 0,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.25,
+      "interval": 3,
+      "duration": 156,
+      "startOffset": 9,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.35,
+      "interval": 2,
+      "duration": 30,
+      "startOffset": 164,
+      "groupId": 0
+    },
+    {
+      "name": "BoldenoneUndecylenate",
+      "dose": 50,
+      "interval": 3,
+      "duration": 6,
+      "startOffset": 9,
+      "groupId": 0
+    },
+    {
+      "name": "BoldenoneUndecylenate",
+      "dose": 62.5,
+      "interval": 3,
+      "duration": 108,
+      "startOffset": 15,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneCypionate",
+      "dose": 120,
+      "interval": 3,
+      "duration": 6,
+      "startOffset": 9,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneCypionate",
+      "dose": 150,
+      "interval": 3,
+      "duration": 108,
+      "startOffset": 15,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneCypionate",
+      "dose": 80,
+      "interval": 3,
+      "duration": 39,
+      "startOffset": 123,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteronePropionate",
+      "dose": 25,
+      "interval": 2,
+      "duration": 30,
+      "startOffset": 164,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 40,
+      "interval": 1,
+      "duration": 7,
+      "startOffset": 198,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 20,
+      "interval": 1,
+      "duration": 30,
+      "startOffset": 205,
+      "groupId": 0
+    }
+  ]
+}
