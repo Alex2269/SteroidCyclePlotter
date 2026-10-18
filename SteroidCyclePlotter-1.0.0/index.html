@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Steroid Cycle Plotter</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="chart.min.js"></script>
+    <script src="chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="chartjs-plugin-zoom.min.js"></script>
+</head>
+<body>
+    <h1 style="text-align:center;margin:2rem 0 1.5rem 0;">
+        📊 Steroid Cycle Plotter <span id="version-display"></span>
+    </h1>
+
+    <!-- 📅 CYCLE START DATE -->
+    <div id="top-settings-container">
+        <div id="cycle-date-container">
+            <!-- ✅ title залишено (пояснення для лейбла, не конфліктує з data-tooltip) -->
+            <label for="cycle-start-date" data-i18n="cycle-start-date-label" 
+                   title="Дата початку циклу для розрахунків">
+                Cycle Start Date
+            </label>
+            <input type="date" id="cycle-start-date" required />
+        </div>
+    </div>
+
+    <!-- 📋 ADDED COMPOUNDS LIST -->
+    <div class="compound-list" id="compound-list"></div>
+
+    <!-- 🧪 ADD NEW COMPOUND FORM -->
+    <form id="compound-form" autocomplete="off">
+        <label for="compound-select" data-i18n="compound-label">Compound</label>
+        <select id="compound-select" required>
+            <option value="" disabled selected data-i18n="compound-select-placeholder">Select compound</option>
+        </select>
+
+        <label for="dose-input" data-i18n="dose-label">Dose (mg or IU)</label>
+        <input type="number" id="dose-input" min="0.01" step="any" 
+               data-i18n-placeholder="dose-placeholder" placeholder="e.g. 100" required />
+
+        <!-- ✅ title залишено (пояснення для лейбла) -->
+        <label for="half-life-input" data-i18n="half-life-label" 
+               title="Фізіологічний T½ впливає на форму кривої. Масштаб значень калібрується окремо через normalizationDivisor.">
+            Half-life (days)
+        </label>
+        <input type="number" id="half-life-input" min="0.01" step="any" 
+               data-i18n-placeholder="half-life-placeholder" placeholder="e.g. 7" required />
+
+        <label for="interval-input" data-i18n="interval-label">Dosing interval (days)</label>
+        <input type="number" id="interval-input" min="1" step="1" value="7" required />
+
+        <label for="duration-input" data-i18n="duration-label">Cycle duration (days)</label>
+        <input type="number" id="duration-input" min="1" step="1" value="30" required />
+
+        <label for="start-offset-input" data-i18n="start-offset-label">Start offset (days)</label>
+        <!-- ✅ title залишено для input (нативний tooltip для accessibility) -->
+        <input type="number" id="start-offset-input" min="0" step="1" value="0" 
+               placeholder="0" title="Offset from cycle start (days)" />
+
+        <label for="time-shift-input" style="color: #d35400; font-weight: bold;" 
+               data-i18n="time-shift-label">⏰ Global time shift (hours)</label>
+        <!-- ✅ title залишено для input -->
+        <input type="number" id="time-shift-input" min="-24" max="24" step="1" value="0" 
+               placeholder="0" title="Shift entire chart by hours" />
+
+        <label for="time-offset-input" style="color: #27ae60; font-weight: bold;" 
+               data-i18n="time-offset-label">⏱️ Compound time offset (hours)</label>
+        <!-- ✅ title залишено для input -->
+        <input type="number" id="time-offset-input" min="-12" max="23" step="1" value="0" 
+               placeholder="0" title="Individual dosing time for this compound (hours)" />
+
+        <label for="group-id-input" data-i18n="group-id-label">Group ID:</label>
+        <input type="number" id="group-id-input" min="-1" max="99" step="1" value="0" placeholder="0" />
+
+        <button id="submit-btn" type="submit" data-i18n="submit-btn">Add Compound</button>
+    </form>
+
+    <!-- 📈 CHART CONTAINER -->
+    <canvas id="chart-container" style="width: 100%; max-width: 1200px; max-height: 400px; height: 100%; margin: 2rem auto; display: block;"></canvas>
+
+    <!-- 🔥 CONTROL PANEL -->
+    <div class="controls-top-row" style="display: flex; align-items: center; max-width: 1100px; margin: 0 auto 1rem auto; gap: 1rem; flex-wrap: wrap; justify-content: center; padding: 1.25rem 1rem;">
+        
+        <!-- Left panel: Import/Export -->
+        <div class="button-panel1" style="display: flex; align-items: center;">
+            <input type="file" id="import-file" style="display:none" accept=".json" />
+            <!-- ❌ ВИДАЛЕНО title (JS додасть data-tooltip) -->
+            <button id="import-button" type="button">📁</button>
+            <!-- ❌ ВИДАЛЕНО title -->
+            <button id="export-button" type="button">💾</button>
+            <!-- ❌ ВИДАЛЕНО title -->
+            <button id="export-schedule-button" type="button">📅</button>
+        </div>
+
+        <!-- Center panel: Update & Zoom -->
+        <div class="button-panel2" style="display: flex; align-items: center;">
+            <!-- ❌ ВИДАЛЕНО title -->
+            <button id="update-chart-button" type="button">🔄</button>
+            <!-- ❌ ВИДАЛЕНО title -->
+            <button id="reset-zoom-button" type="button">📐</button>
+        </div>
+
+        <!-- Left block: checkboxes -->
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
+                <input type="checkbox" id="combine-checkbox" />
+                <span data-i18n="combine-checkbox">🟠 Combine steroids</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
+                <input type="checkbox" id="toggle-compound-list" checked />
+                <span data-i18n="toggle-list">Show list</span>
+            </label>
+        </div>
+
+        <!-- Right block: units + palette + settings + LANG TOGGLE -->
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: nowrap;">
+            <!-- Unit switcher -->
+            <label style="display: flex; align-items: center; gap: 0.25rem; white-space: nowrap;">
+                <!-- ❌ ВИДАЛЕНО title (JS додасть data-tooltip) -->
+                <input type="checkbox" id="unit-switch" />
+                <span data-i18n="unit-switch">ng/dL ↔ nmol/L</span>
+            </label>
+
+            <!-- Palette selection -->
+            <div style="display: flex; gap: 0.25rem; align-items: center;">
+                <!-- ✅ Вже є data-tooltip, title відсутній -->
+                <label class="radio-tooltip" data-tooltip="🎨 Light palette (pastel colors)">
+                    <input type="radio" name="colors" id="use-colors-0" data-palette="palette1" checked />
+                </label>
+                <label class="radio-tooltip" data-tooltip="🌑 Dark palette (neon accents)">
+                    <input type="radio" name="colors" id="use-colors-1" data-palette="palette2" />
+                </label>
+                <label class="radio-tooltip" data-tooltip="🌈 Rainbow (NEW!)">
+                    <input type="radio" name="colors" id="use-colors-2" data-palette="palette3" />
+                </label>
+                <label class="radio-tooltip" data-tooltip="🎭 Monochrome (BONUS!)">
+                    <input type="radio" name="colors" id="use-colors-3" data-palette="palette4" />
+                </label>
+                <label class="radio-tooltip" data-tooltip="🍃 Natural/Earth tones (BONUS!)">
+                    <input type="radio" name="colors" id="use-colors-4" data-palette="palette5" />
+                </label>
+            </div>
+
+            <div class="button-separator" style="display: flex; align-items: center; width: 1px; height: 20px; background: #ccc; margin: 0 5px;"></div>
+
+            <!-- 🌐 LANGUAGE TOGGLE -->
+            <div style="display: flex; align-items: center;">
+            <button id="lang-toggle" type="button"
+                    style="padding: 0.25rem 0.75rem; border-radius: 6px; border: 2px solid #007bff;
+                            background: white; color: #007bff; font-weight: 700; cursor: pointer;
+                            font-size: 0.9rem; min-width: 50px;"
+                    data-tooltip="Switch language / Змінити мову">
+                🇺🇦 UA
+            </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main scripts -->
+    <script src="estersConfig.js"></script>
+    <script src="PaletteManager.js"></script>
+    <script src="styles.js"></script>
+    <script src="PharmacokineticCalculations.js"></script>
+    <script src="generateSeries.js"></script>
+    <script src="setupColorSwitchAnimation.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Version + Language init -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const version = window.SteroidPlotter?.appVersion;
+            if (version) {
+                document.getElementById('version-display').textContent = `v${version}`;
+                document.title = `Steroid Cycle Plotter v${version}`;
+                console.log(`🚀 Steroid Cycle Plotter v${version} launched! 💎`);
+            }
+
+            setTimeout(() => {
+                if (typeof initLanguageToggle === 'function') {
+                    initLanguageToggle();
+                }
+            }, 300);
+        });
+    </script>
+</body>
+</html>
