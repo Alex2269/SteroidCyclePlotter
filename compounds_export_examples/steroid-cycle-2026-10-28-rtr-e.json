@@ -1,0 +1,63 @@
+{
+  "startDate": "2027-06-01",
+  "combine": true,
+  "unitSwitch": true,
+  "compounds": [
+    {
+      "name": "TestosteroneEnanthate",
+      "dose": 75,
+      "interval": 2,
+      "duration": 6,
+      "startOffset": 0,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteroneEnanthate",
+      "dose": 75,
+      "interval": 3,
+      "duration": 42,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.25,
+      "interval": 3,
+      "duration": 42,
+      "startOffset": 6,
+      "groupId": 0
+    },
+    {
+      "name": "HCG",
+      "dose": 0.35,
+      "interval": 2,
+      "duration": 16,
+      "startOffset": 48,
+      "groupId": 0
+    },
+    {
+      "name": "TestosteronePropionate",
+      "dose": 20,
+      "interval": 2,
+      "duration": 16,
+      "startOffset": 48,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 40,
+      "interval": 1,
+      "duration": 7,
+      "startOffset": 67,
+      "groupId": 0
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 20,
+      "interval": 1,
+      "duration": 24,
+      "startOffset": 74,
+      "groupId": 0
+    }
+  ]
+}
